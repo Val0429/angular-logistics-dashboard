@@ -1,0 +1,6 @@
+<div class="channel-container">
+  <div class="btn channel-btn" [ngClass]="{'active': selectedChannel === channel}" *ngFor="let channel of channels" (click)="setChannel(channel)">
+    <i class="fa fa-rss"></i>
+    {{channel}}
+  </div>
+</div>

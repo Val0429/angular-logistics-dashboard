@@ -1,0 +1,27 @@
+<div class="app chat-sidebar-container nav-collapsed" [ngClass]="{'nav-static': isapSidebarService.isStaticSidebar, 'nav-collapsed': !isapSidebarService.isStaticSidebar && !isapSidebarService.isMouseInSidebar}">
+  <!-- 左側選單 -->
+  <nav class="sidebar" #sidebar (mouseenter)="isapSidebarService.isMouseInSidebar=true" (mouseleave)="isapSidebarService.isMouseInSidebar=false">
+    <div class="js-sidebar-content">
+      <header class="logo hidden-sm-down">
+        <a routerLink="/">iSAP</a>
+      </header>
+      <router-outlet name="sidebar"></router-outlet>
+    </div>
+    <!-- <app-isap-sidebar [isStaticSidebar]="isStaticSidebar" [isMouseInSidebar]="isMouseInSidebar"></app-isap-sidebar> -->
+  </nav>
+  <!-- 上方選單 -->
+  <nav class="page-controls navbar navbar-dashboard">
+    <app-isap-header (notifySidebarStatus)="isapSidebarService.isStaticSidebar = !isapSidebarService.isStaticSidebar"></app-isap-header>
+  </nav>
+  <!-- Layout 主體 -->
+  <div class="content-wrap" #content>
+    <!-- 內容呈現處 -->
+    <main class="content">
+      <div class="router-component">
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+  </div>
+
+  <router-outlet name="mask-layout"></router-outlet>
+</div>

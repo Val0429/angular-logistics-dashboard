@@ -1,0 +1,16 @@
+<div [class]="baseOptions.rootClass" #nestable>
+  <ng-container *ngIf="nestableDatas?.length > 0; else empty" [ngTemplateOutlet]="ddList" [ngOutletContext]="{'$implicit': nestableDatas}"></ng-container>
+</div>
+
+<ng-template #ddList let-nestableDatas>
+  <ol [class]="baseOptions.listClass">
+    <li [class]="baseOptions.itemClass" *ngFor="let nestableData of nestableDatas" #item [title]="appendDataAttr(item, nestableData)">
+      <div class="dd-handle">{{nestableData['text']}}</div>
+      <ng-container *ngIf="nestableData?.children && nestableData.children.length > 0" [ngTemplateOutlet]="ddList" [ngOutletContext]="{'$implicit': nestableData.children}"></ng-container>
+    </li>
+  </ol>
+</ng-template>
+
+<ng-template #empty>
+  <div class="dd-empty"></div>
+</ng-template>

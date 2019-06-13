@@ -1,0 +1,56 @@
+<div class="video-container noselect">
+  <div class="empty-mask" *ngIf="!currentChannel">
+    <h1>
+      <span  (click)="isapSidebarService.toggleMaskLayoutActive()">
+          <i class="fa fa-search"></i>
+          {{'LBL_PLEASE_SEARCH_EVENTS' | i18n}}
+      </span>      
+    </h1>
+  </div>
+
+  <section class="video-widget video-layout">
+
+    <app-playback-channels [channels]="channels" [selectedChannel]="currentChannel" (channelChange)="channelChange($event)"></app-playback-channels>
+    <div class="video-empty-mask"  [ngClass]="{'hide': currentVideoUrl}">
+      <div class="video-empty-text">
+        <span class="cycle fa-spin"></span>
+        <span class="text">{{'LBL_CONVERTING' | i18n}}</span>
+      </div>
+      <span (click)="convertVideo()" download class="snapShotButton">
+        <i class="fa fa-refresh"></i>
+      </span>
+    </div>
+    <div id="playBackViewer" class="video-viewer" [ngClass]="{'hide': !currentVideoUrl}">
+
+      <video id="playBackVideo" width="100%" class="video-js vjs-controls-disabled" height="100%" controls>
+        <source [src]="videoUrl" type="video/mp4"> {{'LBL_BROWSER_NOT_SUPPORT_VIDEO_TAG' | i18n}}
+      </video>
+
+      <span (click)="snapShot()" download class="snapShotButton">
+        <i class="fa fa-camera"></i>
+      </span>
+      <a [href]="videoUrl" download class="downButton">
+        <i class="fa fa-download"></i>
+      </a>
+      <span id="btn-convertVideo" (click)="convertVideo()" download class="convertButton">
+        <i class="fa fa-refresh"></i>
+      </span>
+    </div>
+
+    <div class="video-control-panel">
+      <div class="video-control-play {{isPlaying()}}" (click)="playVideo()">
+        <span></span>
+        <span></span>
+      </div>
+      <div class="rate-panel">
+        <span class="rate-btn" [ngClass]="{active: speed === 1}" (click)="playVideoRate(1)">x1</span>
+        <span class="rate-btn" [ngClass]="{active: speed === 2}" (click)="playVideoRate(2)">x2</span>
+        <span class="rate-btn" [ngClass]="{active: speed === 3}" (click)="playVideoRate(3)">x3</span>
+        <span class="rate-btn" [ngClass]="{active: speed === 4}" (click)="playVideoRate(4)">x4</span>
+      </div>
+    </div>
+  </section>
+  <section class="video-widget timeline">
+    <app-timeline [beginTime]="timelineBeginTime" [timelineStamps]="timelineStamps" (currentTimeChange)="currentTimeChange($event)"></app-timeline>
+  </section>
+</div>

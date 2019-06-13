@@ -1,0 +1,158 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item" routerLink="/">{{'LBL_HOME' | i18n}}</li>
+  <li class="breadcrumb-item" routerLink="/configuration">{{'LBL_CONFIGURATION' | i18n}}</li>
+  <li class="breadcrumb-item active">{{'LBL_USER' | i18n}}</li>
+</ol>
+<h1 class="mb">{{'LBL_USER' | i18n}}</h1>
+<section class="widget">
+  <div class="row">
+    <div class="col-md-12">
+      <button type="button" class="btn btn-success" (click)="editModal.show();convertToEditUser()">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        {{'BTN_CREATE' | i18n}}
+      </button>
+      <button type="button" class="btn btn-primary" (click)="filterModal.show()">
+        <i class="fa fa-filter" aria-hidden="true"></i>
+        {{'BTN_DISPLAY_FILTER' | i18n}}
+      </button>
+      <!-- <button type="button" class="btn btn-secondary">
+        <i class="fa fa-file-archive-o" aria-hidden="true"></i>
+        Export Data
+      </button> -->
+    </div>
+  </div>
+  <div class="widget-table-overflow">
+    <table class="table table-striped table-lg mt-lg mb-0 table-hover">
+      <thead class="no-bd">
+        <tr>
+          <th>{{'LBL_EMAIL' | i18n}}</th>
+          <th>{{'LBL_NICKNAME' | i18n}}</th>
+          <th>{{'LBL_CREATED_AT' | i18n}}</th>
+          <th>{{'LBL_UPDATED_AT' | i18n}}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="pointer" *ngFor="let user of users" (click)="editModal.show();convertToEditUser(user)">
+          <td>{{user?.get('email')}}</td>
+          <td>{{user?.get('nickname')}}</td>
+          <td>{{user?.createdAt | date: 'yyyy-MM-dd hh:mm:ss'}}</td>
+          <td>{{user?.updatedAt | date: 'yyyy-MM-dd hh:mm:ss'}}</td>
+          <td class="text-right">
+            <i class="fa fa-2x fa-times text-danger" aria-hidden="true" (click)="removeMember($event, user)"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="text-bold" *ngIf="users.length < 1" style="margin: 15px;">
+      {{'LBL_NO_DATA' | i18n}}
+    </div>
+
+  </div>
+  <div class="row mt pt" *ngIf="users.length > 0">
+    <div class="col-md-12">
+      <app-page-viewer [pageViewerOptions]="pageViewerOptions" (pageChange)="pageChange($event)"></app-page-viewer>
+    </div>
+  </div>
+
+</section>
+
+<!-- Edit Modal -->
+<div bsModal #editModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog" *ngIf="currentEditUser">
+    <div class="modal-content">
+      <div class="modal-header flex-column">
+        <button (click)="editModal.hide()" aria-label="Close" class="close ml-auto" type="button">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title text-center fw-bold" *ngIf="currentEditUser?.objectId">{{'BTN_EDIT' | i18n}}</h4>
+        <h4 class="modal-title text-center fw-bold" *ngIf="!currentEditUser?.objectId">{{'BTN_CREATE' | i18n}}</h4>
+      </div>
+      <div class="modal-body">
+        <form role="form">
+          <fieldset>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-horizontal">
+                  <div class="form-group row">
+                    <label class="form-control-label col-md-3 col-12 text-right text-bold">{{'LBL_EMAIL' | i18n}}:</label>
+                    <div class="col-md-9 col-12">
+                      <input type="text" class="form-control" id="email" name="email" [placeholder]="'LBL_EMAIL' | i18n" autocomplete="off" [(ngModel)]="currentEditUser.email">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="form-control-label col-md-3 col-12 text-right text-bold">{{'LBL_PASSWORD' | i18n}}:</label>
+                    <div class="col-md-9 col-12">
+                      <input type="password" class="form-control" id="password" name="password" [placeholder]="'LBL_PASSWORD' | i18n" autocomplete="off" [(ngModel)]="currentEditUser.password">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="form-control-label col-md-3 col-12 text-right text-bold">{{'LBL_NICKNAME' | i18n}}:</label>
+                    <div class="col-md-9 col-12">
+                      <input type="text" class="form-control" id="nickname" name="nickname" [placeholder]="'LBL_NICKNAME' | i18n" autocomplete="off" [(ngModel)]="currentEditUser.nickname">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-success" (click)="editModal.hide();saveEditUser()">
+          <i class="fa fa-filter"></i> {{'BTN_SAVE' | i18n}}
+        </button>
+        <button type="button" class="btn btn-gray" (click)="editModal.hide();">
+          <i class="glyphicon glyphicon-remove"></i> {{'BTN_CANCEL' | i18n}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Filter Modal -->
+<div bsModal #filterModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header flex-column">
+        <button (click)="filterModal.hide()" aria-label="Close" class="close ml-auto" type="button">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title text-center fw-bold">{{'BTN_DISPLAY_FILTER' | i18n}}</h4>
+      </div>
+      <div class="modal-body">
+        <form role="form">
+          <fieldset>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-horizontal">
+                  <div class="form-group row">
+                    <label class="form-control-label col-md-3 col-12 text-right text-bold">{{'LBL_EMAIL' | i18n}}:</label>
+                    <div class="col-md-9 col-12">
+                      <input type="text" class="form-control" id="email" name="email" [placeholder]="'LBL_EMAIL' | i18n" [(ngModel)]="queryParams.email">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="form-control-label col-md-3 col-12 text-right text-bold">{{'LBL_NICKNAME' | i18n}}:</label>
+                    <div class="col-md-9 col-12">
+                      <input type="text" class="form-control" id="nickname" name="nickname" [placeholder]="'LBL_NICKNAME' | i18n" [(ngModel)]="queryParams.nickname">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-success" (click)="filterModal.hide();pageChange()">
+          <i class="fa fa-filter"></i> {{'BTN_FILTER' | i18n}}
+        </button>
+        <button type="button" class="btn btn-gray" (click)="filterModal.hide();clearSearch()">
+          <i class="glyphicon glyphicon-remove"></i> {{'BTN_CLEAR' | i18n}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

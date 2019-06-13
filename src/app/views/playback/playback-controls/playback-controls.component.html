@@ -1,0 +1,104 @@
+<div class="mask-layout " *ngIf="isapSidebarService.maskLayoutActive" [@enterAnimation] (click)="isapSidebarService.toggleMaskLayoutActive()">
+  <div class="mask-sidebar" (click)="$event.stopPropagation()">
+    <h3 class="search-title">
+      {{'LBL_SEARCH_EVENTS' | i18n}}
+      <button type="button" class="btn btn-default search-close" (click)="isapSidebarService.toggleMaskLayoutActive()">
+        <i class="fa fa-times"></i>
+      </button>
+    </h3>
+    <div class="search-panel">
+      
+        <div class=form-group>
+            <div class="input-group">
+              <span class="input-group-addon">{{'LBL_PACKAGING' | i18n}}</span>
+              <input class="form-control" type="text" id="packageNo"/>
+            </div>
+          </div>
+      <div class=form-group>
+        <div class="input-group">
+          <span class="input-group-addon">{{'LBL_LOCATION_NAME' | i18n}}</span>        
+          <select id="selectLocationID" class="form-control" appSelect2 >
+              <option value="">{{'LBL_ALL_LOCATIONS' | i18n}}</option>
+            <option *ngFor="let loaction of locations" value="{{loaction.id}}">
+              {{loaction.name}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class=form-group>
+        <div class="input-group">
+          <span class="input-group-addon">{{'LBL_BEGIN_DATE' | i18n}}</span>
+          <input class="form-control" type="text"  (datepickerChange)="beginDateChange($event)" appDatepicker [(ngModel)]="beginDate"/>
+        </div>
+      </div>
+      <div class=form-group>
+          <div class="input-group">
+            <span class="input-group-addon">{{'LBL_BEGIN_TIME' | i18n}}</span>
+            <input class="form-control" type="text" appTimepicker [timepickerOptions]="{step: 15 , timeFormat: 'h:i A'} " (timepickerChange)="beginTimeChange($event)" [(ngModel)]="beginTime" />
+          </div>
+        </div>
+      <div class=form-group>
+        <div class="input-group">
+          <span class="input-group-addon">{{'LBL_END_DATE' | i18n}}</span>
+          <input class="form-control" type="text" appDatepicker  (datepickerChange)="endDateChange($event)"/>
+        </div>
+      </div>
+      <div class=form-group>
+          <div class="input-group">
+            <span class="input-group-addon">{{'LBL_END_TIME' | i18n}}</span>
+            <input class="form-control" type="text" appTimepicker  [timepickerOptions]="{step: 15 , timeFormat: 'h:i A'}" (timepickerChange)="endTimeChange($event)" />
+          </div>
+        </div>
+      <div class=form-group>
+        <div class="input-group">
+          <span class="input-group-addon">{{'LBL_EXCEPTION' | i18n}}</span>
+          <select id="selectExceptionName" class="form-control" appSelect2>
+            <option value="">{{'LBL_NO_EXCEPTION' | i18n}}</option>
+              <option *ngFor="let exceptionStatusName of exceptionStatusNames" [value]="exceptionStatusName">
+                {{exceptionStatusName | uppercase | i18n }}
+              </option>
+            </select>
+        </div>
+      </div>
+      <input type="button" class="btn btn-primary" [value]="'BTN_SEARCH' | i18n" (click)="clickSearch()">
+    </div>
+    <div class="search-result-panel">
+      <table class="table table-hover">
+        <thead>
+          <tr>  
+            <th>{{'LBL_PACKAGING' | i18n}}</th>          
+            <th>{{'LBL_LOCATION_NAME' | i18n}}</th>
+            <th>{{'LBL_SCAN_TIME' | i18n}}</th>
+            <th></th>
+          </tr>          
+        </thead>
+        <tbody>
+          
+          <tr *ngIf="!scanEvents || scanEvents.length <= 0">
+            <td colspan='2' class="text-center">{{'LBL_NO_DATA' | i18n}}</td>
+          </tr>
+          <tr *ngFor="let item of scanEvents" >
+              <ng-container *ngIf="getPackageNo(item.scanData) ==packageNo || packageNo.length==0">
+                  <td>
+                      {{ getPackageNo(item.scanData) }}
+                    </td>
+                <td>
+                  {{item.location.name }}
+                </td>
+                <td>
+                    {{item.scanAt | date: 'yyyy-MM-dd hh:mm:ss a'}}
+                </td>
+                <td>
+                  <a routerLink="/playback/{{item.id}}" class="btn btn-warning" (click)="getScanEvent()">{{'LBL_VIEW' | i18n}}</a>
+                </td>
+
+              </ng-container>
+          
+
+          
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<!-- 時間軸容器 -->
+<div class="timeline-container noselect" (mousedown)="setBeginScrollPosition($event)" #timelineContainer>
+
+  <!-- Debug -->
+  <!-- <pre style="position: absolute; top: -200px;">beginTime = {{beginTime|date:'yyyy-MM-dd HH:mm:ss'}}
+  beginTime = {{beginTime}},
+  currentTime = {{currentTime|date:'yyyy-MM-dd HH:mm:ss'}},
+  currentContainerWidth = {{currentContainerWidth}} px,
+  resizeOffset = {{resizeOffset}} px,
+  containerTimeOffset = {{containerTimeOffset}}</pre> -->
+
+  <!-- 時間軸準新調校層 -->
+  <div class="timeline-adapter" #adapter>
+    <!-- 時間軸本體 -->
+    <div class="timeline" #timeline>
+      <!-- 選取的標記顯示 -->
+      <div class="mark-container">
+        <!-- <div class="mark" *ngFor="let tag of tags" [style.left]="getMarkBeginPosition(tag)" [style.width]="getMarkWidth(tag)"></div> -->
+        <div class="mark-item" *ngFor="let timelineStamp of timelineStamps" [style.background-color]="timelineStamp.backgroundColor || this.stampsDefultColor" [style.left]="getStampBeginPosition(timelineStamp)" (click)="clickMark(timelineStamp.timestamp)">
+          <div class="mark-item-info"  [style.background-color]="timelineStamp.backgroundColor || this.stampsDefultColor ">
+              <span class="mark-item-info-arrow"  [style.border-top]="'10px solid ' + ( timelineStamp.backgroundColor || this.stampsDefultColor ) "></span> 
+            <!-- <ng-content select="[mark-type=body]"></ng-content> -->
+            <span class="mark-item-info-time" >
+              <h5>
+                  <i class="fa fa-cube"></i>
+                  {{timelineStamp.description}}    
+              </h5>
+              <h5>
+                <i class="fa fa-clock-o"></i>
+                  {{timelineStamp.timestamp|date:'HH:mm:ss'}}              
+              </h5>
+              
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- 秒數文字顯示 -->
+      <div class="timeline-num-bar" #numberBar>
+        <div class="timeline-num" *ngFor="let timelabel of timelabels">{{timelabel}}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 秒數準心 -->
+  <div class="redline">
+    <div class="current-time">{{currentTime|date:'HH:mm:ss'}}</div>
+  </div>
+</div>

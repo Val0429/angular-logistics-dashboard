@@ -1,0 +1,96 @@
+<div class="container-fluid no-gutters">
+  <div class="navbar-header">
+    <ul class="nav navbar-nav flex-row">
+      <li class="nav-item" (click)="notifySidebarStatus.emit()">
+        <a class="nav-link" placement="bottom">
+          <i class="fa fa-bars fa-lg"></i>
+        </a>
+      </li>
+      <li class="nav-item ml-lg hidden-sm-down">
+        <!-- 無作用，配合 Template 做調整，勿寫入任何 DOM -->
+      </li>
+
+      <!-- <li class="nav-item mr" routerLinkActive="active">
+        <a class="nav-link hidden-md-down" placement="bottom" routerLink="/live">
+          <i class="fa fa-video-camera" aria-hidden="true"></i>
+          Live Monitoring
+        </a>
+      </li>
+      <li class="nav-item mr" routerLinkActive="active">
+        <a class="nav-link hidden-md-down" placement="bottom" routerLink="/playback">
+          <i class="fa fa-youtube-play" aria-hidden="true"></i>
+          Playback
+        </a>
+      </li>
+      <li class="nav-item mr" routerLinkActive="active">
+        <a class="nav-link hidden-md-down" placement="bottom" routerLink="/reports">
+          <i class="fa fa-file-text-o" aria-hidden="true"></i>
+          Reports
+        </a>
+      </li> -->
+
+    </ul>
+  </div>
+
+
+  <!-- this part is hidden for xs screens -->
+  <div class="collapse navbar-collapse">
+    <ul class="nav navbar-nav flex-row float-right">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle dropdown-toggle-notifications">
+          <strong>{{username}}</strong>
+        </a>
+      </li>
+
+      <li class="nav-item dropdown ml-lg">
+        <a class="nav-link dropdown-toggle" (click)="settings.collapse = !settings.collapse">
+          <i class="fa fa-cog fa-lg"></i>
+        </a>
+        <ul #settings class="dropdown-menu dropdown-menu-right" [collapse]="!settings?.collapse" (mouseleave)="settings.collapse = false">
+          <ng-container *ngIf="isAdmin">
+            <li>
+              <a class="dropdown-item" routerLink="/configuration">
+                <i class="fa fa-pencil-square-o"></i> &nbsp; {{'LBL_CONFIGURATION' | i18n}}
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="/configuration/about">
+                <i class="fa fa-info-circle"></i> &nbsp; {{'LBL_ABOUT' | i18n}}
+              </a>
+            </li>
+            <li class="dropdown-divider"></li>
+          </ng-container>
+          <li>
+            <a class="dropdown-item" (click)="logOut()">
+              <i class="fa fa-sign-out"></i> &nbsp; {{'BTN_LOGOUT' | i18n}}
+            </a>
+          </li>          
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+
+  <div class="main-fun-container">
+    <div class="main-fun-btn">
+      <a class="nav-link " placement="bottom" routerLinkActive="active" routerLink="/live">
+        <i class="fa fa-video-camera" aria-hidden="true"></i>
+        <h5 class="hidden-md-down">{{'BTN_LIVE' | i18n}}</h5>
+      </a>
+    </div>
+    <div class="main-fun-btn">
+      <a class="nav-link " placement="bottom" routerLinkActive="active" routerLink="/playback">
+        <i class="fa fa-youtube-play" aria-hidden="true"></i>
+        <h5 class="hidden-md-down">{{'BTN_PLAYBACK' | i18n}}</h5>
+      </a>
+    </div>
+    <!-- <div class="main-fun-btn">
+      <a class="nav-link " placement="bottom" routerLinkActive="active" routerLink="/reports">
+        <i class="fa fa-file-text-o" aria-hidden="true"></i>
+        <h5 class="hidden-md-down">Reports</h5>
+      </a>
+    </div> -->
+  </div>
+</div>
+
+

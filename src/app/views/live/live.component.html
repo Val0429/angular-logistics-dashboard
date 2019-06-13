@@ -1,0 +1,29 @@
+<div class="video-container noselect">
+  <section class="widget full">
+    <div class="video-wrapper" [ngClass]="{x2: layoutRange == 2, x3: layoutRange == 3, x4: layoutRange == 4}">
+      <div class="video-panel" [ngClass]="" *ngFor="let locationChannel of locationChannels | slice:displayBegin:displayEnd" (dblclick)="selectChannel(locationChannel)">
+        <i class="loading fa fa-circle-o-notch fa-spin fa-2x fa-fw"></i>
+        
+        <img [src]="getChannelSnapshot(locationChannel.nvrChannelNo)">
+        <span (click)="downloadSnapshot(locationChannel)" class="snapShotButton">
+          <i class="fa fa-camera"></i>
+        </span>
+        <div class="location-info-bar">
+          <label>
+            <i class="fa fa-map-marker"></i> {{locationChannel.location.name}}</label>
+          <label>
+            <i class="fa fa-rss"></i> {{locationChannel.nvrChannelNo}}</label>
+        </div>
+      </div>
+    </div>
+    <div class="video-pagelist">
+      <app-page-viewer [pageViewerOptions]="pageViewerOptions" (pageChange)="pageChange($event)"></app-page-viewer>
+      <select class="form-control layout-selector" [(ngModel)]="layoutRange" (change)="refreshPageViewer()">
+        <option [value]="1">1×1</option>
+        <option [value]="2">2×2</option>
+        <option [value]="3">3×3</option>
+        <option [value]="4">4×4</option>
+      </select>
+    </div>
+  </section>
+</div>

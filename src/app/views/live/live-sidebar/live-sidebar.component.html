@@ -1,0 +1,21 @@
+<h4 class="sidebar-nav-title">{{'LBL_LOCATIONS' | i18n}}
+  <input type="text" class="slide-searchbar form-control" [placeholder]="'LBL_SEARCH_NAME' | i18n" [(ngModel)]="locationName"/>
+</h4>
+<ul class="sidebar-nav">
+        <li routerLinkActive="active">
+                <a routerLink="/live/all">
+                  <span class="icon">
+                    <i class="fa fa-map-pin" aria-hidden="true"></i>
+                  </span> {{'LBL_VIEW_ALL' | i18n}}
+                </a>
+     </li>
+    
+    <li routerLinkActive="active" *ngFor="let location of locations | locationsFilter:locationName">
+      <a routerLink="/live/{{location.id}}">
+        <span class="icon">
+          <i class="fa fa-map-marker" aria-hidden="true"></i>
+        </span> {{location.name}}
+      </a>
+    </li>
+  </ul>
+

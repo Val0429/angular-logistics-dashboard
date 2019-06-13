@@ -1,0 +1,247 @@
+/* Theme 畫面修正 */
+
+input,
+button,
+textarea,
+*:focus {
+  outline-style: none;
+}
+
+ul.unstyled,
+ol.unstyled {
+  margin-left: 0;
+  list-style: none;
+  padding: 0;
+}
+
+.mask-layout {
+  background-color: rgba(30, 33, 39, 0.58);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+}
+
+
+/* 套件修正相關 */
+
+.mwlResizable {
+  box-sizing: border-box;
+}
+
+
+/* ExtraButtonDirective */
+
+.extra-button-container {
+  width: 30px;
+  text-align: center;
+  padding-left: 6px;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.extra-button-container.hide {
+  display: none;
+}
+
+.extra-button {
+  background-color: #fff;
+  color: #5d8fc2;
+  line-height: 24px;
+  height: 24px;
+  border-radius: .2rem;
+  border: 1px solid #5d8fc2;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+
+/* 自訂常用 Class */
+
+.pointer {
+  cursor: pointer;
+}
+
+.text-white {
+  color: #fff !important;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.text-size-85 {
+  font-size: 85%;
+}
+
+
+/* Overwrite Theme */
+
+.breadcrumb {
+  padding-left: 0 !important;
+  cursor: pointer;
+}
+
+.breadcrumb-item.active {
+  cursor: default;
+}
+
+.select2-container {
+  width: 100% !important;
+}
+
+.widget-control-panel {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+}
+
+.widget-control-panel.in-bb {
+  top: 11px;
+}
+
+.table th,
+.table td {
+  vertical-align: middle !important;
+}
+
+.form-control-label {
+  line-height: 28px;
+}
+
+.checkbox.abc-checkbox.horizontal {
+  display: inline-block;
+  padding-top: 4px;
+}
+
+.checkbox.abc-checkbox.horizontal:first-child {
+  padding-left: 4px;
+}
+
+.select2-container--default .select2-selection--single,
+.select2-container--default .select2-selection--multiple {
+  border: 1px solid #dedede !important;
+  border-radius: 0.25rem !important;
+  min-height: 35px !important;
+  font-size: 1rem !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  line-height: 35px !important;
+}
+
+.select2-container .select2-selection--single .select2-selection__rendered {
+  padding-left: 12px !important;
+  color: #555555 !important;
+  font-weight: normal !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 35px !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__rendered {
+  padding: 0 12px !important;
+  min-height: 50px !important;
+  line-height: 25px !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+  background-color: #5c8fc2 !important;
+  color: #fff !important;
+  border: 1px solid #5c8fc2 !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+  color: #fff !important;
+}
+
+.selectize-control.multi .selectize-input>div {
+  background-color: #4175ab !important;
+  color: #fff !important;
+  padding: 5px 10px !important;
+  font-size: 16px !important;
+}
+
+.select2-inner-padding {
+  padding-left: 1em;
+}
+
+.select2-inner-padding.x2 {
+  padding-left: 2em;
+}
+
+.select2-inner-padding.x3 {
+  padding-left: 3em;
+}
+
+
+/* card item */
+
+.card-item-container {
+  width: 100%;
+  position: relative;
+}
+
+.card-item {
+  display: inline-block;
+  padding-right: 15px !important;
+  margin-bottom: 15px !important;
+}
+
+.card-item-body {
+  width: 100%;
+  display: table;
+  border: 2px solid #555;
+  height: 60px;
+  border-radius: .3rem;
+  cursor: pointer;
+}
+
+.card-item-cell {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.card-item-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 15px;
+}
+
+.card-item-cell.control {
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  width: 58px;
+  position: relative;
+}
+
+.card-item-cell.control i {
+  padding: 14px;
+}
+
+.widget.full {
+  height: 100%;
+}
+
+.video-container {
+  position: absolute;
+  top: 70px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  overflow: hidden;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}

@@ -1,0 +1,80 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item" routerLink="/">{{'LBL_HOME' | i18n}}</li>
+  <li class="breadcrumb-item" routerLink="/configuration">{{'LBL_CONFIGURATION' | i18n}}</li>
+  <li class="breadcrumb-item active">{{'LBL_NVR_SETTINGS' | i18n}}</li>
+</ol>
+<h1 class="mb">{{'LBL_NVR_SETTINGS' | i18n}}</h1>
+
+<form role="form" (ngSubmit)="save()">
+  <section class="widget" *ngIf="nvr">
+    <div class="widget-body">
+      <fieldset>
+        <div class="row">
+          <div class="col-lg-8 col-md-12">
+            <div class="form-horizontal">
+              <div class="form-group row">
+                <label class="form-control-label col-md-3 col-12 text-right text-bold">{{'LBL_NVR_SERVER_IP_ADDRESS' | i18n}}:</label>
+                <div class="col-md-6 col-12">
+                  <input type="text" class="form-control" id="serverIp" name="serverIp" [placeholder]="'LBL_NVR_SERVER_IP_ADDRESS' | i18n"
+                    autocomplete="off" [(ngModel)]="nvr.serverIp">
+                </div>
+                <div class="col-md-3 col-12">
+                  <div class="checkbox abc-checkbox abc-checkbox-primary" style="position: absolute; top: 6px;padding-left: 4px;">
+                    <input id="isHttps" name="isHttps" type="checkbox" [checked]="nvr.isHttps" (change)="nvr.isHttps = !nvr.isHttps">
+                    <label for="isHttps">{{'BTN_HTTPS' | i18n}}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="form-control-label col-md-3 col-12 text-right text-bold">{{'LBL_NVR_SERVER_PORT' | i18n}}:</label>
+                <div class="col-md-9 col-12">
+                  <input type="number" class="form-control" id="serverPort" name="serverPort" [placeholder]="'LBL_NVR_SERVER_PORT' | i18n"
+                    autocomplete="off" [(ngModel)]="nvr.serverPort">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="form-control-label col-md-3 col-12 text-right text-bold">{{'LBL_NVR_SERVER_ACCOUNT' | i18n}}:</label>
+                <div class="col-md-9 col-12">
+                  <input type="text" class="form-control" id="serverAccount" name="serverAccount" [placeholder]="'LBL_NVR_SERVER_ACCOUNT' | i18n"
+                    autocomplete="off" [(ngModel)]="nvr.serverAccount">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="form-control-label col-md-3 col-12 text-right text-bold">{{'LBL_NVR_SERVER_PASSWORD' | i18n}}:</label>
+                <div class="col-md-9 col-12">
+                  <input type="text" class="form-control" id="serverPassword" name="serverPassword" [placeholder]="'LBL_NVR_SERVER_PASSWORD' | i18n"
+                    autocomplete="off" [(ngModel)]="nvr.serverPassword">
+                </div>
+              </div>
+              <!-- <div class="form-group row">
+                <label class="form-control-label col-md-3 col-12 text-right text-bold">NVR Server Name:</label>
+                <div class="col-md-9 col-12">
+                  <input type="text" class="form-control" id="serverName" name="serverName" placeholder="NVR Server Name" autocomplete="off"
+                    [(ngModel)]="nvr.serverName">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="form-control-label col-md-3 col-12 text-right text-bold">NVR Camera Server Name:</label>
+                <div class="col-md-9 col-12">
+                  <input type="text" class="form-control" id="cameraServerName" name="cameraServerName" placeholder="NVR Camera Server Name"
+                    autocomplete="off" [(ngModel)]="nvr.cameraServerName">
+                </div>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </section>
+  <div class="form-actions">
+    <div class="row">
+      <div class="offset-md-3 col-md-12 ">
+        <button class="btn btn-primary" type="submit">
+          <i class="fa fa-refresh fa-spin fa-fw" *ngIf="isSaving"></i>
+          {{'BTN_SAVE' | i18n}}
+        </button>
+      </div>
+    </div>
+  </div>
+
+</form>

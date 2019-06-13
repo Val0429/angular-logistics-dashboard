@@ -1,0 +1,115 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item" routerLink="/">{{'LBL_HOME' | i18n}}</li>
+  <li class="breadcrumb-item" routerLink="/configuration">{{'LBL_CONFIGURATION' | i18n}}</li>
+  <li class="breadcrumb-item active">{{'LBL_LOCATION_SETTINGS' | i18n}}</li>
+</ol>
+<h1 class="mb">{{'LBL_LOCATION_SETTINGS' | i18n}}</h1>
+
+<div class="row mt">
+  <div class="col-md-12">
+    <div class="" dnd-droppable [dropZones]="['channel']" dnd-sortable-container [sortableData]="nvrChannels">
+      <div class="widget">
+          <div class="region-title">
+              <h4 class="mb">{{'LBL_AVAILABLE_CHANNELS' | i18n}}</h4>
+          </div>
+        <label class="region-item unset-channel" *ngFor="let nvrChannel of nvrChannels;let nvrChannelIndex = index" dnd-sortable
+          [sortableIndex]="nvrChannelIndex">
+          {{nvrChannel.nvrChannelNo}}
+        </label>
+      </div>
+    </div>
+    <!-- Region -->
+    <div class="region-drop-zone" dnd-droppable [dropZones]="['location']" dnd-sortable-container [sortableData]="relationships">
+      <div class="region-item col-md-3" *ngFor="let relationship of relationships;let locationIndex = index" dnd-sortable [sortableIndex]="locationIndex">
+        <div class="widget widget-bottom">
+          <header class="bb">
+            <div class="region-title">
+              <input appEditable [editableActiveStyle]="{ 'border': '2px dashed #ff9d9d' }" type="text" name="location" [(ngModel)]="relationship.location.name"
+                [placeholder]="'LBL_LOCATION_NAME' | i18n">
+            </div>
+          </header>
+          <div class="widget-body pt">
+            <!-- City -->
+            <div class="city-drop-zone" [ngClass]="{'empty': relationship?.channels.length < 1}" dnd-droppable [dropZones]="['channel']"
+              dnd-sortable-container [sortableData]="relationship?.channels">
+              <div class="city-item" *ngFor="let channel of relationship?.channels;let channelIndex = index" dnd-sortable [sortableIndex]="channelIndex"
+                (dragstart)="$event.stopPropagation()">
+                <div class="city-item-cell name">
+                  <!-- <input type="text" name="channel" readonly> -->
+                  <div class="item-cell-label">
+                    {{ channel.nvrChannelNo }}
+                  </div>
+                </div>
+                <!-- <div class="city-item-cell edit" (click)="editModal.show();currentEditChannel=channel">
+                  <i class="glyphicon glyphicon-pencil"></i>
+                </div>
+                <div class="city-item-cell control" (click)="removeChannel(relationship, channel)">
+                  <i class="fa fa-times"></i>
+                </div> -->
+              </div>
+            </div>
+          </div>
+          <h3 class="widget-close" (click)="removeLocation(relationship)">
+            <i class="fa fa-times"></i>
+          </h3>
+          <div class="widget-bottom-btn" [style.background-color]="'#fafafa'">
+
+          </div>
+          <!-- <div class="widget-bottom-btn" (click)="createChannel(relationship)">
+            {{'BTN_CREATE_NEW_CHANNEL' | i18n}}
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="form-actions">
+  <button type="submit" class="btn btn-primary pointer" (click)="save()">
+    <i [ngClass]="{'glyphicon glyphicon-floppy-disk': !isSaveing, 'fa fa-refresh fa-spin fa-fw': isSaveing}"></i>
+    {{'BTN_SAVE' | i18n}}
+  </button>
+
+  <button type="submit" class="btn btn-success pointer pull-right" (click)="createLocation()">
+    <i class="fa fa-plus"></i>
+    {{'BTN_CREATE_NEW_LOCATION' | i18n}}
+  </button>
+</div>
+
+<!-- Filter Modal -->
+<div bsModal #editModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header flex-column">
+        <button (click)="editModal.hide()" aria-label="Close" class="close ml-auto" type="button">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title text-center fw-bold">{{'LBL_EDIT_CHANNEL' | i18n}}</h4>
+      </div>
+      <div class="modal-body">
+        <form role="form" *ngIf="currentEditChannel">
+          <fieldset>
+            <div class="form-horizontal">
+              <div class="form-group row">
+                <label class="form-control-label col-md-3 col-12 text-right text-bold">{{'LBL_CHANNEL_NO' | i18n}}:</label>
+                <div class="col-md-9 col-12">
+                  <select id="selectLocationID" class="form-control" appSelect2>
+                    <option *ngFor="let nvrChannel of nvrChannels" value="{{nvrChannel.id}}">
+                      {{nvrChannel.nvrChannelNo}}
+                    </option>
+                  </select>
+                  <!-- <input type="text" class="form-control" id="nvrChannelNo" name="nvrChannelNo" [placeholder]="'LBL_CHANNEL_NO' | i18n" [(ngModel)]="currentEditChannel.nvrChannelNo"> -->
+                </div>
+              </div>
+              <!-- <div class="form-group row">
+                <label class="form-control-label col-md-3 col-12 text-right text-bold">{{'LBL_STREAM_NO' | i18n}}:</label>
+                <div class="col-md-9 col-12">
+                  <input type="text" class="form-control" id="streamNo" name="streamNo" [placeholder]="'LBL_STREAM_NO' | i18n" [(ngModel)]="currentEditChannel.streamNo">
+                </div>
+              </div> -->
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

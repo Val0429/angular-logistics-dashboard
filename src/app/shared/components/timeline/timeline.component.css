@@ -1,0 +1,155 @@
+.timeline-container {
+  width: 100%;
+  overflow: hidden;
+  height: 100%;
+  cursor: ew-resize;
+}
+
+.timeline-adapter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.timeline {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  
+  /* transition: left 0.2s linear; */
+}
+
+.timeline-num-bar {
+  position: absolute;
+  bottom: 0;
+  height: 40px;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 0;
+  background-image: url('/assets/10secLabel.png');
+  background-position: 25px bottom;
+  background-repeat: repeat-x;
+}
+
+.timeline-num {
+  width: 50px;
+  display: inline-block;
+  text-align: center;
+  font-size: 1rem;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.redline {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  bottom: 0;
+  width: 1px;
+  background-color: #f54b0f;
+  cursor: pointer;
+}
+
+.current-time {
+  position: absolute;
+  width: 100px;
+  top: -30px;
+  left: -50px;
+  text-align: center;
+  background-color: #f54b0f;
+  box-shadow: 0px 0px 5px rgba(0,0,0,0.5);
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: .2rem;
+}
+
+.current-time:after {
+  position: absolute;
+  content: '';
+  width: 0px;
+  height: 0px;
+  border: 12px solid transparent;
+  border-top: 10px solid #f54b0f;
+  bottom: -22px;
+  margin-left: -51px;
+}
+
+.mark-item-container {}
+
+.mark-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 1px;
+  background-color: #f5a61c;
+  cursor: pointer;
+}
+
+.mark-item:hover{
+  z-index: 99;
+}
+
+.mark-item-info {
+  position: absolute;
+  height: 80px;
+  width: 120px;
+  background-color: #f2b32f;
+  border-radius: .2rem;
+  box-shadow: 0px 0px 5px #0000009c;
+  top: -83px;
+  left: -60px;
+  color: #1f1f1f;
+}
+
+/* .mark-item-info:after {
+  position: absolute;
+  content: '';
+  width: 0px;
+  height: 0px;
+  border: 12px solid transparent;
+  border-top: 10px solid #f2b32f;
+  bottom: -22px;
+  margin-left: 49px;
+} */
+
+.mark-item-info-arrow {
+  position: absolute;
+  content: '';
+  width: 0px;
+  height: 0px;
+  border: 12px solid transparent;
+  border-top: 10px solid #f2b32f;
+  bottom: -22px;
+  margin-left: 49px;
+}
+
+.mark-item-info-time {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 0px 8px;
+  color: #343434;
+}
+
+.mark-item-info-time h5{
+  font-size: 16px;
+  font-weight: bold;
+  text-align: left;
+}
+
+

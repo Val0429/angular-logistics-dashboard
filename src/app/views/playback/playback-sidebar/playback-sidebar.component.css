@@ -1,0 +1,22 @@
+.btn-slidebar{
+    width: 100%;
+    height: 40px;
+    line-height: 20px;
+    background-color: #c69c2d;
+    padding: 5px;
+    cursor: pointer;
+    border: 5px solid #242424;
+    padding: 3px 13px;
+    border-radius: 10px;
+    color: #383838;
+}
+
+.btn-slidebar:hover,
+.btn-slidebar:active{
+    background-color: #f2b32f;
+    color: #383838;
+} 
+
+.sidebar-title{
+    margin-left: 10px;
+}

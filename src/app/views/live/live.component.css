@@ -1,0 +1,123 @@
+.video-wrapper {
+  color: white;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  height: 100%;
+  grid-gap: 4px;
+  padding-bottom: 70px;
+}
+
+.video-wrapper.x2 {
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.video-wrapper.x3 {
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.video-wrapper.x4 {
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+}
+
+.video-panel {
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #eee;
+  border-radius: .5em;
+  background-color: #212121;
+  border: 3px solid #212121;
+}
+
+.video-panel:active {
+  border: 3px solid #F2BE35;
+}
+
+.video-panel>img {
+  max-width: 100%;
+  max-height: 100%;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.17);
+  cursor: pointer;
+}
+
+.video-pagelist {
+  height: 50px;
+  line-height: 50px;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+}
+
+.layout-selector {
+  position: absolute;
+  bottom: 8px;
+  right: 0;
+  width: 80px;
+}
+
+.video-panel .snapShotButton {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 5px;
+  font-size: 24px;
+  text-align: center;
+  opacity: 0.9;
+  background-color: #fff;
+  color: #212121;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.video-panel .snapShotButton:hover {
+  opacity: 1;
+  background-color: #F2BE35;
+  color: #212121;
+}
+
+.video-panel img {
+  z-index: 1;
+}
+
+.loading {
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+}
+
+.location-info-bar {
+  background-color: #F2BE35;
+  color: #212121;
+  bottom: 8px;
+  left: 8px;
+  border-radius: 5px;
+  position: absolute;
+  font-size: 1.2vw;
+  text-align: left;
+  padding: 5px 10px;
+  transition: all 0.2s ease;
+  z-index: 2;
+}
+
+.video-panel:hover .location-info-bar {
+  opacity: 0.1;
+  cursor: pointer;
+}
+
+.location-info-bar label {
+  margin: 0px;
+  margin-left: 5px;
+}

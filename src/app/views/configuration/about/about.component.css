@@ -1,0 +1,8 @@
+.version-title {
+    text-align: center;
+    margin-top: 10%;
+    font-size: 50px;
+    font-weight: bold;
+    color: #ddd;
+    text-shadow: 0px 1px 1px #00000033, 0px -1px 1px #ffffffa1;
+}

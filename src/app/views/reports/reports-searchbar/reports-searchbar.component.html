@@ -1,0 +1,53 @@
+<div class="searchbar-container">
+  <div class="search-title">
+      <h2>{{'LBL_SEARCH_BAR' | i18n}}</h2>
+  </div> 
+  <div class=form-group>
+    <div class="input-group">
+      <span class="input-group-addon">{{'LBL_LOCATION_NAME' | i18n}}</span>
+      <select class="form-control" [(ngModel)]="locationId" (change)="clickSearch()">
+        <option value="">{{'LBL_SELECT_LOCATION' | i18n}}</option>
+        <option *ngFor="let loaction of locations" value="{{loaction.id}}">
+          {{loaction.name}}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class=form-group>
+    <div class="input-group">
+      <span class="input-group-addon">{{'LBL_BEGIN_DATE' | i18n}}</span>
+      <input class="form-control" type="text" (datepickerChange)="beginDateChange($event)" appDatepicker [(ngModel)]="beginDate"
+      />
+    </div>
+  </div>
+  <div class=form-group>
+    <div class="input-group">
+      <span class="input-group-addon">{{'LBL_BEGIN_TIME' | i18n}}</span>
+      <input class="form-control" type="text" (timepickerChange)="beginTimeChange($event)" appTimepicker/>
+    </div>
+  </div>
+  <div class=form-group>
+    <div class="input-group">
+      <span class="input-group-addon">{{'LBL_END_DATE' | i18n}}</span>
+      <input class="form-control" type="text" appDatepicker (datepickerChange)="endDateChange($event)" />
+    </div>
+  </div>
+  <div class=form-group>
+    <div class="input-group">
+      <span class="input-group-addon">{{'LBL_END_TIME' | i18n}}</span>
+      <input class="form-control" type="text" appTimepicker (timepickerChange)="endTimeChange($event)" />
+    </div>
+  </div>
+  <div class=form-group>
+    <div class="input-group">
+      <span class="input-group-addon">{{'LBL_EXCEPTION' | i18n}}</span>
+      <select class="form-control" [(ngModel)]="exceptionName" (change)="clickSearch()">
+        <option value="">{{'LBL_NO_EXCEPTION' | i18n}}</option>
+        <option *ngFor="let exceptionStatusName of exceptionStatusNames" value="{{exceptionStatusName}}">
+          {{exceptionStatusName}}
+        </option>
+      </select>
+    </div>
+  </div>
+  <input type="button" class="btn btn-primary" [value]="'BTN_SEARCH' | i18n" (click)="clickSearch()">
+</div>
